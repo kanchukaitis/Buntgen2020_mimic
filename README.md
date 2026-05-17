@@ -8,6 +8,6 @@ Because the chronologies used by Buntgen et al. (2020) are not available, the ou
 
 ### References
 
-Büntgen, U., Arseneault, D., Boucher, É., Churakova, O.V., Gennaretti, F., Crivellaro, A., Hughes, M.K., Kirdyanov, A.V., Klippel, L., Krusic, P.J. and Linderholm, H.W., 2020. Prominent role of volcanism in Common Era climate variability and human history. *Dendrochronologia*, 64, 125757.
+Büntgen, U., Arseneault, D., Boucher, É., Churakova, O.V., Gennaretti, F., Crivellaro, A., Hughes, M.K., Kirdyanov, A.V., Klippel, L., Krusic, P.J. Linderholm, H.W. et al., 2020. Prominent role of volcanism in Common Era climate variability and human history. *Dendrochronologia*, 64, 125757.
 
-Büntgen, U., Allen, K., Anchukaitis, K.J., Arseneault, D., Boucher, É., Bräuning, A., Chatterjee, S., Cherubini, P., Churakova, O.V., Corona, C. and Gennaretti, F., 2021. The influence of decision-making in tree ring-based climate reconstructions. *Nature Communications*, 12(1), 3411.
+Büntgen, U., Allen, K., Anchukaitis, K.J., Arseneault, D., Boucher, É., Bräuning, A., Chatterjee, S., Cherubini, P., Churakova, O.V., Corona, C. Gennaretti, F. et al., 2021. The influence of decision-making in tree ring-based climate reconstructions. *Nature Communications*, 12(1), 3411.
