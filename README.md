@@ -1,6 +1,6 @@
 # A reproduction of the chronology building procedure in Buntgen et al. (2020)
 
-In Buntgen et al. (2020), the authors use a sparse set of ensemble tree-ring chronologies to reconstruct Northern Hemisphere summer temperatures over the Common Era.  The paper does not provide the chronologies, but does (in the supplemental materials) describe how the 16 member site chronologies were developed.  This R script uses dplR and the information in Buntgen et al. (2020) and the raw ring width files provided by Buntgen et al. (2021) to create the 9 chronologies used in the reconstruction. 
+In Buntgen et al. (2020), the authors use a sparse set of ensemble tree-ring chronologies to reconstruct Northern Hemisphere summer temperatures over the Common Era.  The paper does not provide the chronologies and nor were data archived. The paper does (in the supplemental materials) describe how the 16 member site chronologies were developed.  This R script uses dplR and the information in Buntgen et al. (2020) with the raw ring width files provided by Buntgen et al. (2021) to create the 9 chronologies used in the reconstruction. 
 
 The Tucson raw ring width files were archived here: https://www.ncei.noaa.gov/pub/data/paleo/treering/reconstructions/buentgen2021/
 
