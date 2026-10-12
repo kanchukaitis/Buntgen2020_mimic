@@ -75,6 +75,16 @@ Method notes:
   signal-free RCS (Melvin & Briffa 2014).
 - Robust (biweight) means throughout, matching the original.
 
+## A step-by-step notebook
+
+New to Python, or coming from R/ARSTAN? Start with the tutorial notebook
+[`Buntgen2020_dplPy_demo.ipynb`](Buntgen2020_dplPy_demo.ipynb), which walks
+through the whole method interactively — reading a file, detrending by RCS,
+the standardization choices one at a time, the 16-member ensemble, and finally
+all nine sites — using plain, readable dplPy calls. The script
+`build_buntgen_chronologies_dplpy.py` is the exact, reproducible build; the
+notebook is the friendly companion that shows how it works.
+
 ## Caveats
 
 - **Pith offsets are unavailable** in the archived measurements, so a pith offset
