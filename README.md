@@ -4,7 +4,7 @@ A reproducible reconstruction of the 9 regional tree-ring-width (TRW)
 ensemble-median chronologies of
 
 > Büntgen, U. et al. (2020) [Prominent role of global volcanism in Common Era
-> climate variability and human history](https://doi.org/10.1016/j.dendro.2020.125757). **Dendrochronologia** 64, 125757.
+> climate variability and human history](https://doi.org/10.1016/j.dendro.2020.125757). *Dendrochronologia* 64, 125757.
 
 The original study built, for each site, an ensemble of 16 different
 Regional Curve Standardization (RCS) chronologies and took their median as
