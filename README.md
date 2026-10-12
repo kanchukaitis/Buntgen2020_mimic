@@ -1,14 +1,15 @@
 # Büntgen et al. (2020) chronology reproduction
 
 A reproducible reconstruction of the 9 regional tree-ring-width (TRW)
-ensemble-median chronologies of
+ensemble-median chronologies from:
 
 > Büntgen, U. et al. (2020) [Prominent role of global volcanism in Common Era
 > climate variability and human history](https://doi.org/10.1016/j.dendro.2020.125757). *Dendrochronologia* 64, 125757.
 
 The original study built, for each site, an ensemble of 16 different
 Regional Curve Standardization (RCS) chronologies and took their median as
-the site chronology. Neither the code nor the final chronologies were archived,
+the site chronology (described in the supplemental material to the article). 
+Neither the code nor the final chronologies were archived,
 so this repository reconstructs them from the publicly archived ring-width
 measurements using [**dplPy**](https://github.com/OpenDendro/dplPy) (the Python
 Dendrochronology Program Library).
@@ -73,6 +74,16 @@ Method notes:
 - **Signal-free RCS** uses dplPy's `sfrcs()`, a port of CRUST single-curve
   signal-free RCS (Melvin & Briffa 2014).
 - Robust (biweight) means throughout, matching the original.
+
+## A step-by-step notebook
+
+New to Python, or coming from R/ARSTAN? Start with the tutorial notebook
+[`Buntgen2020_dplPy_demo.ipynb`](Buntgen2020_dplPy_demo.ipynb), which walks
+through the whole method interactively — reading a file, detrending by RCS,
+the standardization choices one at a time, the 16-member ensemble, and finally
+all nine sites — using plain, readable dplPy calls. The script
+`build_buntgen_chronologies_dplpy.py` is the exact, reproducible build; the
+notebook is the friendly companion that shows how it works.
 
 ## Caveats
 
