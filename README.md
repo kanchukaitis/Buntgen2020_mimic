@@ -1,14 +1,15 @@
 # Büntgen et al. (2020) chronology reproduction
 
 A reproducible reconstruction of the 9 regional tree-ring-width (TRW)
-ensemble-median chronologies of
+ensemble-median chronologies from:
 
 > Büntgen, U. et al. (2020) [Prominent role of global volcanism in Common Era
 > climate variability and human history](https://doi.org/10.1016/j.dendro.2020.125757). *Dendrochronologia* 64, 125757.
 
 The original study built, for each site, an ensemble of 16 different
 Regional Curve Standardization (RCS) chronologies and took their median as
-the site chronology. Neither the code nor the final chronologies were archived,
+the site chronology (described in the supplemental material to the article). 
+Neither the code nor the final chronologies were archived,
 so this repository reconstructs them from the publicly archived ring-width
 measurements using [**dplPy**](https://github.com/OpenDendro/dplPy) (the Python
 Dendrochronology Program Library).
