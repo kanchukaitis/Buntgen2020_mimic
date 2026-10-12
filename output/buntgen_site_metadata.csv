@@ -1,0 +1,10 @@
+code,name,lat,lon,season,type
+GTB,Great Basin,39,-117,"7, 8",TRW
+SCO,S Colorado Plateau,35,-111,6,TRW
+QUL,Quebec-Labrador,54,-71,8,TRW
+SCA,N Scandinavia,68,20,"7, 8",TRW
+ALP,Austrian Alps,47,12,"7, 8",TRW
+YAM,Yamal,69,71,7,TRW
+TAI,Taimyr,72,90,7,TRW
+ALT,Altai,50,88,"6, 7",TRW
+NYA,N Yakutia,68,128,6,TRW
