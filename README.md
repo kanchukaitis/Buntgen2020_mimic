@@ -1,17 +1,17 @@
 # Büntgen et al. (2020) chronology reproduction
 
-A reproducible reconstruction of the nine regional tree-ring-width (TRW)
+A reproducible reconstruction of the 9 regional tree-ring-width (TRW)
 ensemble-median chronologies of
 
 > Büntgen, U. et al. (2020) *Prominent role of global volcanism in Common Era
 > climate variability and human history.* **Dendrochronologia** 64, 125757.
 
-The original study built, for each site, an ensemble of **16 slightly different
-Regional Curve Standardization (RCS) chronologies** and took their **median** as
+The original study built, for each site, an ensemble of 16 different
+Regional Curve Standardization (RCS) chronologies** and took their median as
 the site chronology. Neither the code nor the final chronologies were archived,
 so this repository reconstructs them from the publicly archived ring-width
 measurements using [**dplPy**](https://github.com/OpenDendro/dplPy) (the Python
-Dendrochronology Program Library), with no proprietary software required.
+Dendrochronology Program Library).
 
 ## Sites and data
 
@@ -39,8 +39,8 @@ International Tree-Ring Data Bank: https://www.ncei.noaa.gov/products/paleoclima
 internal space in the 8-character ID field (e.g. `Y8d 024b`). The version in
 `itrdb/` has been reformatted to the standard left-justified ID (`Y8d024b`),
 leaving the year and measurement columns untouched; this does not change the
-chronology, only the series labels. (dplPy reads either form equivalently; the
-cleanup is for compatibility with stricter readers such as ARSTAN. The
+chronology, only the series labels. (dplPy reads either form equivalently. This
+cleanup is for compatibility with stricter readers. The
 `fix_nya_ids()` helper in the script regenerates it from a fresh download.)
 
 ## The 16-member ensemble
@@ -61,7 +61,7 @@ The ensemble **median** across the (up to) 16 members is the site chronology.
 
 Method notes:
 
-- **`−10`** is a *length-adaptive* cubic spline at **10 % of the regional-curve
+- **`−10`** indicates a *length-adaptive* cubic spline at **10 % of the regional-curve
   length** (ARSTAN's negative-stiffness = percent-of-length convention), not a
   fixed 10-year spline.
 - **Common scale for the median.** Büntgen's STD/ARSTAN chronologies came from
@@ -80,14 +80,14 @@ Method notes:
   of 1 (first measured ring = cambial age 1) is assumed for every series. This is
   a well-known limitation of RCS for relict/sub-fossil wood, where the true
   cambial age at the first ring can be large. It is most visible at **NYA**, whose
-  thinly-replicated early record (1–1000 CE) is almost entirely relict and whose
+  early record (1–1000 CE) is almost entirely relict and whose
   ensemble median is correspondingly elevated (~1.2). Supplying real pith offsets
   (via the `pith_offset` column) would most improve that site.
-- **Series counts differ from the paper's Table S1** for some sites, because the
-  online ITRDB holdings have grown/changed since 2020; using the current archive
-  is the reproducible choice.
+- **Some series counts may differ from the paper's Table S1** presumably because the
+  online ITRDB holdings have grown/changed since 2020. Using the current archive
+  is the reproducible choice, but may not fully replicate Buntgen et al. 2020.
 - Some archived files contain minor data-quality quirks (e.g. a few overlapping
-  duplicate IDs at GTB); dplPy handles these on read.
+  duplicate IDs at GTB). dplPy handles these on read.
 
 ## Reproduce
 
