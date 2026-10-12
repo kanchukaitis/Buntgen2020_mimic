@@ -25,12 +25,13 @@ Method notes (see README for the full discussion):
     negative-stiffness = percent-of-length convention), not a fixed 10-year spline.
   * Buntgen built STD/ARS in ARSTAN, whose index calculation places residual
     (power-transform) indices on the same ~1 scale as ratio indices. dplPy's
-    rcs(ratios=False) returns residuals centered on 0, so the power-transform
+    rcs(method="difference") returns residuals centered on 0, so the power-transform
     members are rescaled here to the mean & SD of their matching ratio member
     (rescale_to_ratio) -- a chronology-level stand-in for ARSTAN's per-series
     rescaling, so all 16 members share one scale and the median is coherent.
-  * Pith offsets are unavailable in the archived measurements, so po = 1 (first
-    measured ring = cambial age 1) for all series. This is a known RCS limitation
+  * Pith offsets are unavailable in the archived measurements, so po = 0 (pith
+    present; first measured ring = cambial age 1) for all series -- dplPy 0.8's
+    pith offset is a TRUE offset (0 = pith present). This is a known RCS limitation
     for relict wood and most affects the thin early portion of NYA (see README).
 
 Tools: dplr-equivalent routines in dplPy -- readers(), powt(), rcs(), sfrcs()
@@ -41,7 +42,7 @@ Run:   python3 build_buntgen_chronologies_dplpy.py           # all 9 sites
 Inputs:  itrdb/<CODE>_all.rwl       Outputs: output/<CODE>_all_variants.csv,
          output/<CODE>_chrono.csv, output/buntgen_all_chronologies.csv,
          output/buntgen_site_metadata.csv
-Requires: pip install dplpy  (tested on dplPy 0.7.0). The signal-free members
+Requires: pip install "dplpy>=0.8.0"  (uses the 0.8 harmonized RCS API). The signal-free members
           iterate, so the largest sites (QUL, NYA) take several minutes each.
 """
 import sys, warnings
@@ -100,10 +101,12 @@ def trim_short(r, n=MIN_LEN):
     return r.loc[:, r.notna().sum() >= n]
 
 def make_po(r):
-    # .tuc files carry no pith offset -> pith_offset = 1 for all (first ring = age 1).
-    # KNOWN LIMITATION for relict wood; supply real offsets here if available.
+    # .rwl files carry no pith offset -> pith_offset = 0 for all (pith present,
+    # first measured ring = cambial age 1). dplPy 0.8's pith offset is a TRUE
+    # offset (0 = pith present). KNOWN LIMITATION for relict wood; supply real
+    # offsets here if available.
     return pd.DataFrame({"series": list(r.columns),
-                         "pith_offset": np.ones(len(r.columns), dtype=int)})
+                         "pith_offset": np.zeros(len(r.columns), dtype=int)})
 
 def split_lr(r, t=LR_THRESH):
     last = r.apply(lambda c: c.last_valid_index())
@@ -118,16 +121,19 @@ def _ars(rwi):
     return c["ars"], c["samp_depth"]                       # "ars" = re-reddened ARSTAN
 
 def _rcs_indices(rwl_in, ratios, smoothing):
-    """RCS detrend. smoothing='ten' -> 10%-of-curve-length caps spline (= dplPy's
-    nyrs=None default, which is the supplement's '-10'); smoothing='default' -> the
-    distinct 'RCS without the -10 secondary spline' level (method='ads').
+    """RCS detrend. smoothing='ten' -> the supplement's '-10' spline (10%-of-
+    curve-length; dplPy 0.8 period=-10); smoothing='default' -> the distinct 'RCS
+    without the -10 secondary spline' level (fit='AgeDepSpline').
     *** 'default' RC smoothing is the one unconfirmed mapping; its effect on the
-    median is tiny (see header). Change here if you pin ARSTAN's default. ***"""
+    median is tiny (see header). pos_slope=True keeps the pre-0.8 AgeDepSpline
+    behaviour (dplPy 0.8 changed its default to pos_slope=False). ***"""
     po = make_po(rwl_in)
+    method = "ratio" if ratios else "difference"
     if smoothing == "ten":
-        return dpl.rcs(rwl_in, po=po, ratios=ratios, nyrs=None, method="caps",
-                       make_plot=False)
-    return dpl.rcs(rwl_in, po=po, ratios=ratios, method="ads", make_plot=False)
+        return dpl.rcs(rwl_in, po=po, method=method, fit="Spline", period=-10,
+                       plot=False)
+    return dpl.rcs(rwl_in, po=po, method=method, fit="AgeDepSpline",
+                   pos_slope=True, plot=False)
 
 # the 16 members (name, use_pt, smoothing, chron_kind, is_signal_free)
 SPEC = [
@@ -157,8 +163,9 @@ def build_variant(rwl, use_pt, smoothing, chron_kind, is_sf, min_len=MIN_LEN):
         else:
             rwl_in, ratios = rwl, True               # ratios on raw RW
         if is_sf:
-            rwi = dpl.sfrcs(rwl_in, po=make_po(rwl_in), ratios=ratios,
-                            make_plot=False, verbose=False)   # CRUST single-curve SF-RCS
+            rwi = dpl.sfrcs(rwl_in, po=make_po(rwl_in),
+                            method="ratio" if ratios else "difference",
+                            plot=False, verbose=False)   # CRUST single-curve SF-RCS
         else:
             rwi = _rcs_indices(rwl_in, ratios, smoothing)
         crn, nser = _ars(rwi) if chron_kind == "ARS" else _std(rwi)

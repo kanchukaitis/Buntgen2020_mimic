@@ -88,7 +88,9 @@ notebook is the friendly companion that shows how it works.
 ## Caveats
 
 - **Pith offsets are unavailable** in the archived measurements, so a pith offset
-  of 1 (first measured ring = cambial age 1) is assumed for every series. This is
+  of 0 (pith present, i.e. first measured ring = cambial age 1) is assumed for
+  every series. In dplPy 0.8 the pith offset is a *true offset* (0 = pith present;
+  earlier dplPy used 1 for this). This is
   a well-known limitation of RCS for relict/sub-fossil wood, where the true
   cambial age at the first ring can be large. It is most visible at **NYA**, whose
   early record (1–1000 CE) is almost entirely relict and whose
@@ -103,7 +105,7 @@ notebook is the friendly companion that shows how it works.
 ## Reproduce
 
 ```bash
-pip install dplpy==0.7.0
+pip install dplpy==0.8.0
 python3 build_buntgen_chronologies_dplpy.py          # all nine sites
 python3 build_buntgen_chronologies_dplpy.py QUL NYA  # selected sites
 ```
