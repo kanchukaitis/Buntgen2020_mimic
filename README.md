@@ -7,7 +7,7 @@ ensemble-median chronologies of
 > climate variability and human history.* **Dendrochronologia** 64, 125757.
 
 The original study built, for each site, an ensemble of 16 different
-Regional Curve Standardization (RCS) chronologies** and took their median as
+Regional Curve Standardization (RCS) chronologies and took their median as
 the site chronology. Neither the code nor the final chronologies were archived,
 so this repository reconstructs them from the publicly archived ring-width
 measurements using [**dplPy**](https://github.com/OpenDendro/dplPy) (the Python
